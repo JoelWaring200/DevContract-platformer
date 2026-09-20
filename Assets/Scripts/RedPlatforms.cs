@@ -9,11 +9,11 @@ public class RedPlatforms : MonoBehaviour
     private int blueLayer;
     private int redLayer;
 
-    private Collider platformCollider;
+    private CompositeCollider2D platformCollider;
 
     void Start()
     {
-        platformCollider = GetComponent<Collider>();
+        platformCollider = GetComponent<CompositeCollider2D>();
         //set layer variables
         blueLayer = LayerMask.NameToLayer("midground-blue");
         redLayer = LayerMask.NameToLayer("midground-red");
