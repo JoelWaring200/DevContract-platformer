@@ -29,6 +29,9 @@ public class Player : MonoBehaviour
     private Animator anim;
     private SpriteRenderer sr;
 
+    //character color control
+    public int playerColor = 1;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -48,6 +51,7 @@ public class Player : MonoBehaviour
         float h = Input.GetAxis("Horizontal");
 
         MoveCharacter(h);
+        CharacterColor();
 
         //Initialize isGrounded with whatever the Jump() function
         isGrounded = Jump();
@@ -100,6 +104,22 @@ public class Player : MonoBehaviour
     {
         bool check = Physics2D.Raycast(transform.position, Vector2.down, groundCheckLength, midground);
         return check;
+    }
+
+    void CharacterColor()
+    {
+        if (playerColor == 1)
+        {
+            sr.color = Color.blue;
+        }
+        else if(playerColor == -1)
+        {
+            sr.color = Color.red;
+        }
+        if (Input.GetKeyDown(KeyCode.Mouse1))
+        {
+            playerColor = playerColor * -1;
+        }
     }
 
     //collisions
