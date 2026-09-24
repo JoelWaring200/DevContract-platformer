@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,9 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     //varables
+    //spawnpoint
+    public Transform spawn;
+
     //Player speed 
     public float moveSpeed;
 
@@ -123,18 +127,23 @@ public class Player : MonoBehaviour
     }
 
     //collisions
-    /*
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        //If the player hits a collider that is on a gameObject with the name "WateringCan"
-        if (collision.gameObject.name == "WateringCan")
+        if (collision.gameObject.name == "deathBox")
         {
-            //This will destroy the object you collide with (like a collectable):
-            //Destroy(collision.gameObject);
-
-            //This will switch Scenes
-            //SceneManager.LoadScene("Scene2");
+            spawnPoint();
         }
     }
-    */
+    private void spawnPoint()
+    {
+
+        if (rb2d != null)
+        {
+            rb2d.velocity = Vector3.zero;
+        }
+
+        // Move the player to the spawn point's position and rotation
+        transform.position = spawn.position;
+        transform.rotation = spawn.rotation;
+    }
 }
