@@ -16,7 +16,7 @@ public class Player : MonoBehaviour
     //Ground checking
     public bool isGrounded;
     public LayerMask midground;
-    public float groundCheckLength = 1.25f;
+    public float groundCheckLength = 1.75f;
 
     //Coyote time
     public float coyoteTime;
@@ -28,6 +28,9 @@ public class Player : MonoBehaviour
     //Animations
     private Animator anim;
     private SpriteRenderer sr;
+
+    //character color control
+    public int playerColor = 1;
 
     // Start is called before the first frame update
     void Start()
@@ -48,6 +51,7 @@ public class Player : MonoBehaviour
         float h = Input.GetAxis("Horizontal");
 
         MoveCharacter(h);
+        CharacterColor();
 
         //Initialize isGrounded with whatever the Jump() function
         isGrounded = Jump();
@@ -100,6 +104,22 @@ public class Player : MonoBehaviour
     {
         bool check = Physics2D.Raycast(transform.position, Vector2.down, groundCheckLength, midground);
         return check;
+    }
+
+    void CharacterColor()
+    {
+        if (playerColor == 1)
+        {
+            sr.color = new Color(0.290f, 0.624f, 0.729f);
+        }
+        else if(playerColor == -1)
+        {
+            sr.color = new Color(0.808f, 0.498f, 0.451f);
+        }
+        if (Input.GetKeyDown(KeyCode.Mouse1))
+        {
+            playerColor = playerColor * -1;
+        }
     }
 
     //collisions
